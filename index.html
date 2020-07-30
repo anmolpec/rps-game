@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock paper scissors game</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h2>Rock Paper Scissors</h2>
+        <script>
+            function generate(){
+                let a=Math.floor(3*Math.random());
+                let computerChoice;
+                switch(true){
+                    case a<1:computerChoice="Rock";break;
+                    case a<2:computerChoice="Paper";break;
+                    case a<=3:computerChoice="Scissor";break;
+                }
+                //console.log(computerChoice);
+                return computerChoice;
+            }
+            function displayWinner(winner, playerChoice, computerChoice){
+                let output;
+                if(winner==true){
+                    output="You win! "+`${playerChoice}`+" beats "+`${computerChoice}`;
+                }
+                else{
+                    output="You lose "+`${computerChoice}`+" beats "+`${playerChoice}`;
+                }
+                console.log(output);
+            }
+            function decideWinner(computerChoice, playerChoice){
+                if(playerChoice.toUpperCase()==computerChoice.toUpperCase()){
+                    console.log("TIE");
+                    return;
+                }
+                let winner=false;
+                switch(computerChoice){
+                    case "Rock":{if(playerChoice.toUpperCase()=="PAPER"){
+                        winner=true;
+                    }break;}
+                    case "Paper":{if(playerChoice.toUpperCase()=="SCISSOR"){
+                        winner=true;
+                    }break;};
+                    case "Scissor":{if(playerChoice.toUpperCase()=="ROCK"){
+                        winner=true;
+                    }break;};
+                }
+                displayWinner(winner, playerChoice, computerChoice);
+            }
+            function input(){
+                let string=prompt("Enter Rock,Paper or Scissor");
+                let temp=string.toUpperCase();
+                switch(temp){
+                    case "ROCK":
+                    case "PAPER":
+                    case "SCISSOR":return string;
+                    default: {console.log("Please enter the correct string");
+                    temp=input();
+                    return temp;
+                    }
+                }
+            }
+            function game(){
+                let computerChoice=generate();
+                let playerChoice=input();
+                decideWinner(computerChoice, playerChoice);
+            }
+
+            for(let i=0;i<5;i++){
+                game();
+            }
+        </script>
+    </body>
+</html>
